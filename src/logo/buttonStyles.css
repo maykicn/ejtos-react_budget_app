@@ -1,0 +1,9 @@
+.increase-buttonn {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    width: 40px; /* Adjust width and height as needed */
+    height: 40px;
+    cursor: pointer;
+}

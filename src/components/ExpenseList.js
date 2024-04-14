@@ -1,17 +1,11 @@
 import React, { useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
 import { AppContext } from '../context/AppContext';
-import Currency from './Currency';
+import increaseIcon from '../logo/increase.png';
+import decreaseIcon from '../logo/decrease.png';
 
 const ExpenseList = () => {
     const { expenses, dispatch, currency } = useContext(AppContext);
-
-    const handleDeleteExpense = (id) => {
-        dispatch({
-            type: 'DELETE_EXPENSE',
-            payload: id,
-        });
-    };
 
     const increaseAllocation = (name) => {
         const expense = {
@@ -25,6 +19,18 @@ const ExpenseList = () => {
         });
     };
 
+    const decreaseAllocation = (name) => {
+        const expense = {
+            name: name,
+            cost: 10,
+        };
+
+        dispatch({
+            type: 'RED_EXPENSE',
+            payload: expense
+        });
+    };
+
     return (
         <table className='table'>
             <thead className="thead-light">
@@ -32,6 +38,7 @@ const ExpenseList = () => {
                     <th scope="col">Department</th>
                     <th scope="col">Allocated Budget</th>
                     <th scope="col">Increase by 10</th>
+                    <th scope="col">Decrease by 10</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -41,10 +48,32 @@ const ExpenseList = () => {
                         <td>{expense.name}</td>
                         <td>{currency}{expense.cost}</td>
                         <td>
-                            <button onClick={() => increaseAllocation(expense.name)}>+</button>
+                            <button onClick={() => increaseAllocation(expense.name)}
+                            style={{
+                              backgroundImage: `url(${increaseIcon})`,
+                              backgroundRepeat: 'no-repeat',
+                              backgroundPosition: 'center',
+                              backgroundSize: 'contain',
+                              border: 'none',
+                              width: '30px', // Adjust width and height as needed
+                              height: '30px',
+                              cursor: 'pointer',
+                          }}>
+                            </button>
                         </td>
                         <td>
-                            <TiDelete size='1.5em' onClick={() => handleDeleteExpense(expense.id)} />
+                            <button onClick={() => decreaseAllocation(expense.name)}
+                            style={{
+                              backgroundImage: `url(${decreaseIcon})`,
+                              backgroundRepeat: 'no-repeat',
+                              backgroundPosition: 'center',
+                              backgroundSize: 'contain',
+                              border: 'none',
+                              width: '30px', // Adjust width and height as needed
+                              height: '30px',
+                              cursor: 'pointer',
+                          }}>
+                            </button>
                         </td>
                     </tr>
                 ))}
