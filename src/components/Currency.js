@@ -18,10 +18,10 @@ const Currency = () => {
         onChange={handleCurrencyChange}
         style={{ backgroundColor: 'green', color: 'white' }}
         >
-            <option value="Dollar">Currency($ Dollar)</option>
-            <option value="Pound">Currency(£ Pound)</option>
-            <option value="Euro">Currency(€ Euro)</option>
-            <option value="Rupee">Currency(₹ Rupee)</option>
+            <option value="$">Currency($ Dollar)</option>
+            <option value="£">Currency(£ Pound)</option>
+            <option value="€">Currency(€ Euro)</option>
+            <option value="₹">Currency(₹ Rupee)</option>
         </select>
     </div>
   );
