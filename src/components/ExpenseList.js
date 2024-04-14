@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
 import { AppContext } from '../context/AppContext';
+import Currency from './Currency';
 
 const ExpenseList = () => {
-    const { expenses, dispatch } = useContext(AppContext);
+    const { expenses, dispatch, currency } = useContext(AppContext);
 
     const handleDeleteExpense = (id) => {
         dispatch({
@@ -38,7 +39,7 @@ const ExpenseList = () => {
                 {expenses.map((expense) => (
                     <tr key={expense.id}>
                         <td>{expense.name}</td>
-                        <td>£{expense.cost}</td>
+                        <td>{currency}{expense.cost}</td>
                         <td>
                             <button onClick={() => increaseAllocation(expense.name)}>+</button>
                         </td>
