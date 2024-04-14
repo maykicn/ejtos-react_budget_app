@@ -1,24 +1,52 @@
 import React, { useContext } from 'react';
-import ExpenseItem from './ExpenseItem';
+import { TiDelete } from 'react-icons/ti';
 import { AppContext } from '../context/AppContext';
 
 const ExpenseList = () => {
-    const { expenses } = useContext(AppContext);
+    const { expenses, dispatch } = useContext(AppContext);
+
+    const handleDeleteExpense = (id) => {
+        dispatch({
+            type: 'DELETE_EXPENSE',
+            payload: id,
+        });
+    };
+
+    const increaseAllocation = (name) => {
+        const expense = {
+            name: name,
+            cost: 10,
+        };
+
+        dispatch({
+            type: 'ADD_EXPENSE',
+            payload: expense
+        });
+    };
 
     return (
         <table className='table'>
-              <thead className="thead-light">
-            <tr>
-              <th scope="col">Department</th>
-              <th scope="col">Allocated Budget</th>
-              <th scope="col">Increase by 10</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
+            <thead className="thead-light">
+                <tr>
+                    <th scope="col">Department</th>
+                    <th scope="col">Allocated Budget</th>
+                    <th scope="col">Increase by 10</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
             <tbody>
-            {expenses.map((expense) => (
-                <ExpenseItem id={expense.id} key={expense.id} name={expense.name} cost={expense.cost} />
-            ))}
+                {expenses.map((expense) => (
+                    <tr key={expense.id}>
+                        <td>{expense.name}</td>
+                        <td>£{expense.cost}</td>
+                        <td>
+                            <button onClick={() => increaseAllocation(expense.name)}>+</button>
+                        </td>
+                        <td>
+                            <TiDelete size='1.5em' onClick={() => handleDeleteExpense(expense.id)} />
+                        </td>
+                    </tr>
+                ))}
             </tbody>
         </table>
     );
