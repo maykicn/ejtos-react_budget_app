@@ -6,6 +6,12 @@ import decreaseIcon from '../logo/decrease.png';
 
 const ExpenseList = () => {
     const { expenses, dispatch, currency } = useContext(AppContext);
+    const handleDeleteExpense = (id) => {
+      dispatch({
+          type: 'DELETE_EXPENSE',
+          payload: id,
+      });
+  };
 
     const increaseAllocation = (name) => {
         const expense = {
@@ -73,6 +79,11 @@ const ExpenseList = () => {
                               height: '30px',
                               cursor: 'pointer',
                           }}>
+                            </button>
+                        </td>
+                        <td>
+                            <button onClick={() => handleDeleteExpense(expense.id)}>
+                                <TiDelete size='1.5em'/>
                             </button>
                         </td>
                     </tr>
